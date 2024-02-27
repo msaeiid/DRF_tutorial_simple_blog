@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a50d23-ffd7-4b4a-b8dc-cf0bb9625134" name="Changes" comment="initial">
-      <change afterPath="$PROJECT_DIR$/Posts/urls.py" afterDir="false" />
+    <list default="true" id="f8a50d23-ffd7-4b4a-b8dc-cf0bb9625134" name="Changes" comment="42:26">
+      <change afterPath="$PROJECT_DIR$/Posts/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Posts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Posts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Posts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Posts/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Posts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Posts/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simpleBlog/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpleBlog/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simpleBlog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/simpleBlog/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +52,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.django.DjangoModulesConfigurable",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -129,7 +129,10 @@
       <updated>1708940623296</updated>
       <workItem from="1708940631466" duration="446000" />
       <workItem from="1708964019992" duration="596000" />
-      <workItem from="1708968897703" duration="3565000" />
+      <workItem from="1708968897703" duration="3601000" />
+      <workItem from="1709034712819" duration="4081000" />
+      <workItem from="1709050333115" duration="3753000" />
+      <workItem from="1709059573682" duration="1552000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -147,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708940988968</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="42:26">
+      <option name="closed" value="true" />
+      <created>1708972504563</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708972504563</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,22 +166,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Posts/views.py</url>
-          <line>41</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Posts/views.py</url>
-          <line>40</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="42:26" />
+    <option name="LAST_COMMIT_MESSAGE" value="42:26" />
   </component>
 </project>
