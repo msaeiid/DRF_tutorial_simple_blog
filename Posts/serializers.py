@@ -4,6 +4,8 @@ from Posts.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
+    title = serializers.CharField(max_length=50)
+
     class Meta:
         model = Post
-        fields = ['title', 'content', 'created']
+        fields = '__all__'
