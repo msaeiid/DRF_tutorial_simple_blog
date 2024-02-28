@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework import views, generics, mixins, status
+from rest_framework import views, generics, mixins, status, viewsets
 
 from Posts.models import Post
 from Posts.serializers import PostSerializer
@@ -108,33 +108,57 @@ from Posts.serializers import PostSerializer
 ## Generic API Views and mixins
 
 
-class PostListCreateView(generics.ListCreateAPIView,
-                         mixins.ListModelMixin,
-                         mixins.CreateModelMixin):
-    serializer_class = PostSerializer
+# class PostListCreateView(generics.ListCreateAPIView,
+#                          mixins.ListModelMixin,
+#                          mixins.CreateModelMixin):
+#     serializer_class = PostSerializer
+#     model = Post
+#     queryset = Post.objects.all()
+#
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
+#
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, args, kwargs)
+#
+#
+# class PostRetrieveUpdateDeleteView(generics.GenericAPIView,
+#                                    mixins.RetrieveModelMixin,
+#                                    mixins.UpdateModelMixin,
+#                                    mixins.DestroyModelMixin):
+#     model = Post
+#     serializer_class = PostSerializer
+#     queryset = Post.objects.all()
+#
+#     def get(self, request, *args, **kwargs):
+#         return self.retrieve(request, args, kwargs)
+#
+#     def put(self, request, *args, **kwargs):
+#         return self.update(request, args, kwargs)
+#
+#     def delete(self, request, *args, **kwargs):
+#         return self.destroy(request, args, kwargs)
+
+
+## viewsets and routers -> ViewSet
+
+# class PostViewset(viewsets.ViewSet):
+#     model = Post
+#     serializer_class = PostSerializer
+#
+#     def list(self, request: Request):
+#         posts = self.model.objects.all()
+#         serializer = self.serializer_class(instance=posts, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+#
+#     def retrieve(self, request, pk=None):
+#         post = get_object_or_404(self.model, pk=pk)
+#         serializer = self.serializer_class(instance=post, many=False)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+## viewsets and routers -> ModelViewSet
+class PostViewset(viewsets.ModelViewSet):
     model = Post
-    queryset = Post.objects.all()
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, args, kwargs)
-
-
-class PostRetrieveUpdateDeleteView(generics.GenericAPIView,
-                                   mixins.RetrieveModelMixin,
-                                   mixins.UpdateModelMixin,
-                                   mixins.DestroyModelMixin):
-    model = Post
     serializer_class = PostSerializer
     queryset = Post.objects.all()
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, args, kwargs)
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request, args, kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, args, kwargs)

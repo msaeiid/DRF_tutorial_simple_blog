@@ -16,8 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
+from Posts import views as posts_views
+
+router = DefaultRouter()
+router.register('', posts_views.PostViewset, basename='posts')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('post/', include('Posts.urls'), name='homepage'),
+    # path('post/', include('Posts.urls'), name='homepage'),
+    ## viewsets and routers
+    path('post/', include(router.urls))
 ]

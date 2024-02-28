@@ -2,6 +2,7 @@ from django.urls import path
 
 from Posts import views
 
+
 urlpatterns = [
     ##function based view
     # path('homepage/', views.homepage, name='homepage'),
@@ -13,6 +14,6 @@ urlpatterns = [
     # path('', views.PostsListView.as_view(), name='posts'),
     # path('<int:pk>', views.PostCreateRetrieveUpdateDeleteView.as_view(), name='post'),
     ## Generic API Views
-    path('', views.PostListCreateView.as_view(), name='posts'),
-    path('<int:pk>', views.PostRetrieveUpdateDeleteView.as_view(), name='post'),
+    # path('', views.PostListCreateView.as_view(), name='posts'),
+    # path('<int:pk>', views.PostRetrieveUpdateDeleteView.as_view(), name='post'),
 ]
