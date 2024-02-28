@@ -65,7 +65,7 @@ from Posts.serializers import PostSerializer
 
 
 ## class based views
-# class PostsListView(views.APIView):
+# class PostListCreateView(views.APIView):
 #     serializer_class = PostSerializer
 #     model = Post
 #
@@ -73,6 +73,13 @@ from Posts.serializers import PostSerializer
 #         posts = self.model.objects.all()
 #         serializer = self.serializer_class(posts, many=True)
 #         return Response(serializer.data, status=status.HTTP_200_OK)
+
+#     def post(self, request: Request, *args, **kwargs):
+#         serializer = self.serializer_class(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 #
 #
 # class PostCreateRetrieveUpdateDeleteView(views.APIView):
@@ -84,12 +91,6 @@ from Posts.serializers import PostSerializer
 #         serializer = self.serializer_class(post, many=False)
 #         return Response(serializer.data, status=status.HTTP_200_OK)
 #
-#     def post(self, request: Request, *args, **kwargs):
-#         serializer = self.serializer_class(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 #
 #     def put(self, request: Request, *args, **kwargs):
 #         post = get_object_or_404(self.model, id=kwargs.get('pk'))
