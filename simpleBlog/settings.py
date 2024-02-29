@@ -99,6 +99,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'NON_FIELD_ERRORS_KEY': 'errors',
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 

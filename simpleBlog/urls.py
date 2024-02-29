@@ -27,5 +27,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('post/', include('Posts.urls'), name='homepage'),
     ## viewsets and routers
-    path('post/', include(router.urls))
+    path('post/', include(router.urls)),
+    path('auth/', include('accounts.urls')),
 ]
