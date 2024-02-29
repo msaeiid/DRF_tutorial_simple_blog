@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-
+from rest_framework_simplejwt import views as jwt_view
 from Posts import views as posts_views
 
 router = DefaultRouter()
@@ -28,5 +28,8 @@ urlpatterns = [
     # path('post/', include('Posts.urls'), name='homepage'),
     ## viewsets and routers
     path('post/', include(router.urls)),
-    path('auth/', include('accounts.urls')),
+    # path('auth/', include('accounts.urls')),
+    path('auth/create', jwt_view.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auth/refresh', jwt_view.TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth/verify', jwt_view.TokenVerifyView.as_view(), name='token_verify')
 ]
