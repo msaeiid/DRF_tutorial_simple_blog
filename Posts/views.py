@@ -3,6 +3,8 @@ from django.shortcuts import get_list_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework import permissions
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import views, generics, mixins, status, viewsets
@@ -122,14 +124,8 @@ class PostListCreateView(generics.ListCreateAPIView,
         return self.list(request, *args, **kwargs)
 
     def post(self, request: Request, *args, **kwargs):
-        data = request.data
-        data['author'] = get_object_or_404(User, pk=request.user.id).id
-        serializer = PostSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        request.data['author'] = request.user.pk
+        return self.create(request, *args, **kwargs)
 
 
 class PostRetrieveUpdateDeleteView(generics.GenericAPIView,
@@ -149,6 +145,7 @@ class PostRetrieveUpdateDeleteView(generics.GenericAPIView,
 
     def delete(self, request: Request, *args, **kwargs):
         return self.destroy(request, args, kwargs)
+
 
 ## viewsets and routers -> ViewSet
 
@@ -173,3 +170,30 @@ class PostRetrieveUpdateDeleteView(generics.GenericAPIView,
 #     serializer_class = PostSerializer
 #     queryset = Post.objects.all()
 #     permission_classes = [IsOwnerOrReadOnly, ]
+
+
+class CustomPagination(PageNumberPagination):
+    page_size = 3
+    # request for more object on each page
+    page_size_query_param = 'page_size'
+    page_query_param = 'page'
+
+
+# pagination
+class ListPostsForAuthor(generics.ListAPIView,
+                         mixins.ListModelMixin):
+    serializer_class = PostSerializer
+    model = Post
+    queryset = Post.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    pagination_class = CustomPagination
+
+    def get_queryset(self):
+        # about query...
+        username = self.request.query_params.get('username') or None
+        if username:
+            return Post.objects.filter(author__username=username)
+        return Post.objects.all()
+
+    def get(self, request: Request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

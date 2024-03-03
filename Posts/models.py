@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-User = get_user_model()
+from simpleBlog.settings import AUTH_USER_MODEL
 
 
 class Post(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
