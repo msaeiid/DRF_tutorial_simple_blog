@@ -21,15 +21,15 @@ from rest_framework_simplejwt import views as jwt_view
 from Posts import views as posts_views
 
 router = DefaultRouter()
-router.register('', posts_views.PostViewset, basename='posts')
+#router.register('', posts_views.PostViewSet, basename='posts')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('post/', include('Posts.urls'), name='homepage'),
+    path('post/', include('Posts.urls'), name='homepage'),
     ## viewsets and routers
     path('post/', include(router.urls)),
-    # path('auth/', include('accounts.urls')),
+    path('auth/', include('accounts.urls')),
     path('auth/create', jwt_view.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/refresh', jwt_view.TokenRefreshView.as_view(), name='token_refresh'),
-    path('auth/verify', jwt_view.TokenVerifyView.as_view(), name='token_verify')
+    path('auth/verify', jwt_view.TokenVerifyView.as_view(), name='token_verify'),
 ]

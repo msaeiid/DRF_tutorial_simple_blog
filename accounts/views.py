@@ -4,6 +4,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from accounts.models import User
 from accounts.serializers import SignupSerializer
+from accounts.tokens import create_jwt_pair_for_user
 
 
 class SignupView(generics.CreateAPIView):
@@ -25,8 +26,9 @@ class LoginView(views.APIView):
         password = request.data.get('password')
         user = authenticate(request, email=email, password=password)
         if user is not None:
+            tokens = create_jwt_pair_for_user(user)
             content = {
-                'auth_token': user.auth_token.key
+                'tokens': tokens
             }
             return Response(data=content, status=status.HTTP_200_OK)
         else:
@@ -36,8 +38,8 @@ class LoginView(views.APIView):
             return Response(data=content, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request: Request):
+        tokens = create_jwt_pair_for_user(request.user)
         content = {
-            'username': str(request.user),
-            'auth_token': str(request.auth)
+            'tokens': tokens
         }
         return Response(data=content, status=status.HTTP_200_OK)

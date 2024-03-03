@@ -14,12 +14,22 @@ class SignupSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=8)
 
     def validate(self, attrs):
+        """
+        To prevent duplicate username
+        :param attrs:
+        :return:
+        """
         email_exists = User.object.filter(email=attrs['email']).exists()
         if email_exists:
             raise ValidationError("Email already registered")
         return super().validate(attrs)
 
     def create(self, validated_data):
+        """
+        to hash user password
+        :param validated_data:
+        :return:
+        """
         password = validated_data.pop('password')
         user = super().create(validated_data)
         user.set_password(password)
