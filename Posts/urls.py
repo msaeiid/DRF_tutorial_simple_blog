@@ -15,5 +15,5 @@ urlpatterns = [
     ## Generic API Views
     path('', views.PostListCreateView.as_view(), name='posts'),
     path('<int:pk>/', views.PostRetrieveUpdateDeleteView.as_view(), name='post'),
-    path('list_posts_for_author', views.ListPostsForAuthor.as_view(), name='list_posts_for_author'),
+    path('list_posts_for_author/', views.ListPostsForAuthor.as_view(), name='list_posts_for_author'),
 ]

@@ -124,7 +124,6 @@ class PostListCreateView(generics.ListCreateAPIView,
         return self.list(request, *args, **kwargs)
 
     def post(self, request: Request, *args, **kwargs):
-        request.data['author'] = request.user.pk
         return self.create(request, *args, **kwargs)
 
 
