@@ -34,7 +34,7 @@ class PostListCreateTestCase(APITestCase):
         test_post_data = {
             "title": "sample title",
             "content": "sample content",
-            "author": self.user.id
+            #"author": self.user.id
         }
         request = self.factory.post(self.url, test_post_data)
         request.user = self.user
