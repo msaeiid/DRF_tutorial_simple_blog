@@ -10,8 +10,9 @@ from rest_framework.response import Response
 from rest_framework import views, generics, mixins, status, viewsets
 
 from Posts.models import Post
-from Posts.permissions import ReadOnly, IsOwnerOrReadOnly
+from Posts.permissions import IsOwnerOrReadOnly
 from Posts.serializers import PostSerializer
+from drf_yasg.utils import swagger_auto_schema
 
 User = get_user_model()
 
@@ -126,9 +127,13 @@ class PostListCreateView(generics.ListCreateAPIView,
     permission_classes = [IsOwnerOrReadOnly]
     pagination_class = CustomPagination
 
+    @swagger_auto_schema(operation_summary="Get all posts",
+                         operation_description="Get all posts created...")
     def get(self, request: Request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+    @swagger_auto_schema(operation_summary="Create a post",
+                         operation_description="Create a post by passing")
     def post(self, request: Request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
@@ -142,12 +147,18 @@ class PostRetrieveUpdateDeleteView(generics.GenericAPIView,
     queryset = Post.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
 
+    @swagger_auto_schema(operation_summary="Retrieve post",
+                         operation_description="Retrieve post by passing id")
     def get(self, request: Request, *args, **kwargs):
         return self.retrieve(request, args, kwargs)
 
+    @swagger_auto_schema(operation_summary="Update post",
+                         operation_description="Update post by passing id")
     def put(self, request: Request, *args, **kwargs):
         return self.update(request, args, kwargs)
 
+    @swagger_auto_schema(operation_summary="Delete post",
+                         operation_description="Delete post by passing id")
     def delete(self, request: Request, *args, **kwargs):
         return self.destroy(request, args, kwargs)
 
@@ -193,5 +204,7 @@ class ListPostsForAuthor(generics.ListAPIView,
             return Post.objects.filter(author__username=username)
         return Post.objects.all()
 
+    @swagger_auto_schema(operation_summary="Get posts by author",
+                         operation_description="Get posts by passed username if not all posts")
     def get(self, request: Request, *args, **kwargs):
         return self.list(request, *args, **kwargs)

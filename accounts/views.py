@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, status, views
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -11,6 +12,8 @@ class SignupView(generics.CreateAPIView):
     serializer_class = SignupSerializer
     model = User
 
+    @swagger_auto_schema(operation_summary="Create a new user",
+                         operation_description="Create a new user by passing information")
     def post(self, request: Request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -20,7 +23,8 @@ class SignupView(generics.CreateAPIView):
 
 
 class LoginView(views.APIView):
-
+    @swagger_auto_schema(operation_summary="Authenticate user",
+                         operation_description="Authenticate a new user by passing information")
     def post(self, request: Request):
         email = request.data.get('email')
         password = request.data.get('password')
@@ -37,6 +41,8 @@ class LoginView(views.APIView):
             }
             return Response(data=content, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(operation_summary="Generate JWT token",
+                         operation_description="Generate logged in JWT token")
     def get(self, request: Request):
         tokens = create_jwt_pair_for_user(request.user)
         content = {
