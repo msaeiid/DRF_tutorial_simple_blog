@@ -32,8 +32,7 @@ class PostListCreateTestCase(APITestCase):
         response = self.client.post(reverse('token_obtain_pair'), USER_CREDENTIAL)
 
         token = response.data['access']
-        self.client.force_authenticate(user=User.objects.get(USER_CREDENTIAL['email']), token=token)
-        # self.client.credentials(HTTP_AUTHORIZATION=f'bearer {token}')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
 
     def test_list_posts(self):
         response = self.client.get(reverse('posts'))
@@ -49,3 +48,6 @@ class PostListCreateTestCase(APITestCase):
         }
         response = self.client.post(reverse('posts'), sample_data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['title'], sample_data['title'])
+        self.assertEqual(response.data['content'], sample_data['content'])
+        self.assertEqual(response.data['author'], User.objects.get(email=USER_CREDENTIAL['email']).id)
