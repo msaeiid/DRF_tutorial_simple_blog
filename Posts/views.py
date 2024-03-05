@@ -16,6 +16,11 @@ from Posts.serializers import PostSerializer
 User = get_user_model()
 
 
+class CustomPagination(PageNumberPagination):
+    page_size_query_param = 'page_size'
+    page_query_param = 'page'
+
+
 ## function based views
 
 @api_view(["GET", "POST"])
@@ -119,6 +124,7 @@ class PostListCreateView(generics.ListCreateAPIView,
     model = Post
     queryset = Post.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
+    pagination_class = CustomPagination
 
     def get(self, request: Request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -169,13 +175,6 @@ class PostRetrieveUpdateDeleteView(generics.GenericAPIView,
 #     serializer_class = PostSerializer
 #     queryset = Post.objects.all()
 #     permission_classes = [IsOwnerOrReadOnly, ]
-
-
-class CustomPagination(PageNumberPagination):
-    page_size = 3
-    # request for more object on each page
-    page_size_query_param = 'page_size'
-    page_query_param = 'page'
 
 
 # pagination
