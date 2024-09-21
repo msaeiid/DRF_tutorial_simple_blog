@@ -1,7 +1,3 @@
-Here’s a sample `README.md` for your project based on the **DRF tutorial** you provided:
-
----
-
 # DRF Tutorial Simple Blog
 
 This project is based on the YouTube tutorial titled [**DRF tutorial simple blog**](https://youtu.be/LPeerVUaqz4), which covers the essential steps for building a simple blog API using Django Rest Framework (DRF). It includes various advanced topics such as authentication, permission classes, pagination, and API documentation.
